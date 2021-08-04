@@ -1,0 +1,28 @@
+https://github.com/Kubeus14/travel-agency-be
+https://github.com/Kubeus14/travel-agency-be.git
+
+Projekt można sklonować z repozytorium GitHub. Następnie nalezy go otworzyć w Intelijj Idea.
+Powyżej są linki do aplikacji BackEndowej. Należy najpierw zbudować projekt za pomocą "gradlew build", a natępnie uruchomić
+aplikację. Gdy aplikacja się uruchomi można przetestować metody get,delete,post,put za pomocą Postmana.
+Można utworzyć bazę danych i połączyć się z nią żeby zobaczyć czy hibernate tworzy tabele i relacje.
+Projekt dotyczy aplikacji pracującej jako biuro podróży. Klasy i poszczególne obiekty uwzględniają takie
+obiekty i właściwości jak: Klient,Rezerwacja,Koszyk,Podróż,Rodzaj Podróży. Są klasy odpowiedzialne za mapowanie obiektów
+domenowych, jak i są elementy potrzebne do połączenia z bazą danych oraz wysyłaniem odpowiednich żądań.
+Zrobione są także testy, które można uruchomić.Testują poszczególne klasy "domain". Jest zrobiona jedna procedura i jeden scheduler, a oto ich treść:
+
+Procedura{
+    create
+        definer = root@localhost procedure CheapLastMinuteTravel()
+    begin
+        select * from travel where price<3000;
+    END;
+}
+Scheduler{
+    create definer = root@localhost event LAST_MINUTE on schedule
+     every '1' MINUTE
+            starts '2021-08-03 18:58:11'
+     enable
+     do
+     call CheapLastMinuteTravel();
+}
+Projekt nie jest w całości dokończony. Wiele rzeczy będzie jeszcze nadrabiane.
